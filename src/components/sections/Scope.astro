@@ -105,6 +105,22 @@ const { scope, header } = t;
 <style>
   .scope {
     padding: 64px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .scope::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(640px 420px at 20% 20%, rgba(200, 150, 62, 0.08), transparent 60%),
+      radial-gradient(520px 400px at 85% 80%, rgba(20, 30, 73, 0.38), transparent 68%);
+  }
+  .scope .container-content {
+    position: relative;
+    z-index: 1;
   }
   @media (min-width: 768px) {
     .scope {
@@ -228,10 +244,58 @@ const { scope, header } = t;
     }
   }
   .scope-card {
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
+    position: relative;
+    background:
+      linear-gradient(145deg,
+        rgba(38, 38, 38, 0.74) 0%,
+        rgba(24, 24, 24, 0.54) 100%);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
     border-radius: 14px;
+    box-shadow:
+      inset 0 1px 0 rgba(240, 237, 232, 0.08),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+      0 1px 2px rgba(0, 0, 0, 0.25),
+      0 12px 40px -14px rgba(0, 0, 0, 0.6);
     padding: 32px 28px;
+  }
+  .scope-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg,
+      rgba(200, 150, 62, 0.55) 0%,
+      rgba(240, 237, 232, 0.14) 28%,
+      rgba(140, 180, 220, 0.08) 48%,
+      rgba(255, 215, 170, 0.09) 62%,
+      rgba(240, 237, 232, 0.14) 78%,
+      rgba(200, 150, 62, 0.45) 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .scope-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg,
+      rgba(200, 150, 62, 0.05) 0%,
+      transparent 35%,
+      rgba(140, 180, 220, 0.03) 52%,
+      transparent 70%,
+      rgba(200, 150, 62, 0.04) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .scope-card > * {
+    position: relative;
+    z-index: 1;
   }
   @media (min-width: 768px) {
     .scope-card {

@@ -132,7 +132,7 @@ const cloudflareToken = import.meta.env.PUBLIC_CLOUDFLARE_BEACON_TOKEN;
     <Footer locale={locale} />
     <script>
       // Reveal-on-scroll: triggers once, respects prefers-reduced-motion automatically via CSS.
-      const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+      const revealEls = document.querySelectorAll('.reveal, .reveal-stagger, .process-diagram');
       if (revealEls.length && 'IntersectionObserver' in window) {
         const observer = new IntersectionObserver(
           (entries) => {
