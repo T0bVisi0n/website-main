@@ -146,8 +146,8 @@ export const de = {
         a: 'AI schreibt Text in ~30 Sekunden. Was es überspringt: die Frage was euer Buyer glauben muss bevor er kauft. Die Analyse warum die aktuelle LP nicht konvertiert. Die drei Einwände die euer Endkunden-ICP hat. Das ist der Teil den ihr kauft.',
       },
       {
-        q: 'Warum keine Kundenlogos oder Case-Studies?',
-        a: 'Die Projekte die ich bisher gemacht hab liefen unter NDA als Subcontractor für Agenturen - deren Kunden-LPs, deren Brand. Also Projekte geliefert, Zahlen gesehen, Logos die ich nicht zeigen darf. Mit TobVision ist das anders: transparent, unter eigenem Namen. Der Sprint ist dein direkter Blick auf Prozess + Ergebnis, bevor du dich für mehr entscheidest.',
+        q: 'Keine Agency-Referenzen - warum soll ich trotzdem buchen?',
+        a: 'Für Agencies direkt: stimmt, (noch) keine. Bisher lagen die Projekte in der Baubranche, bei Heilpraktikern und in Ästhetik-Kliniken - drei Nischen, dasselbe Gerüst.\n\nEuer Vorteil: ihr bedient mehrere Verticals parallel. Eine branchenspezifische Referenz hätte eh nur begrenzt Aussagekraft für euren nächsten Client. Was überträgt, ist der Prozess - WIE ich diagnostiziere, bevor ich schreibe.\n\nDer Sprint ist genau das an einem Client-Projekt: klarer Scope, zehn Werktage, am Ende eine LP die konvertiert.',
       },
       {
         q: 'Wie läuft die Zusammenarbeit remote?',

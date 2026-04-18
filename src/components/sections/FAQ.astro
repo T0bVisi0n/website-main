@@ -30,7 +30,9 @@ const { faq } = t;
             </span>
           </summary>
           <div class="faq-answer">
-            <p>{item.a}</p>
+            {item.a.split('\n\n').map((para) => (
+              <p>{para}</p>
+            ))}
           </div>
         </details>
       ))}
@@ -121,6 +123,9 @@ const { faq } = t;
     line-height: 1.65;
     color: var(--color-text-muted);
     max-width: 44rem;
+  }
+  .faq-answer p + p {
+    margin-top: 12px;
   }
   @media (max-width: 520px) {
     .faq-answer {
