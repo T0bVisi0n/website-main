@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getContent } from '../../content';
+
+const locale = 'en' as const;
+const t = getContent(locale);
+const { notFound, header } = t;
+---
+
+<BaseLayout
+  locale={locale}
+  title={notFound.title}
+  description="This page doesn't exist. Back to home or book a quick chat."
+  pathname="/en/404/"
+  noindex={true}
+>
+  <section class="not-found">
+    <div class="container-content not-found-inner">
+      <span class="not-found-code">404</span>
+      <h1 class="not-found-title">{notFound.heading}</h1>
+      <p class="not-found-body">{notFound.body}</p>
+      <div class="not-found-actions">
+        <a href={notFound.homeHref} class="btn-ghost">← {notFound.homeLabel}</a>
+        <a href={header.ctaHref} class="btn-primary">{notFound.ctaLabel} →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding: 80px 0 120px;
+    min-height: 60vh;
+  }
+  .not-found-inner {
+    max-width: 42rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .not-found-code {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3rem, 10vw, 6rem);
+    color: var(--color-accent);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .not-found-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    letter-spacing: -0.01em;
+  }
+  .not-found-body {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  .not-found-actions {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+</style>

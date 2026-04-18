@@ -1,0 +1,78 @@
+---
+import type { Locale } from '../i18n/utils';
+import { alternatePath, LOCALE_LABELS, LOCALES } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  pathname: string;
+}
+
+const { locale, pathname } = Astro.props;
+---
+
+<nav aria-label="Sprache wählen" class="language-switcher">
+  {LOCALES.map((target) => {
+    const href = alternatePath(locale, pathname, target);
+    const isActive = target === locale;
+    return (
+      <a
+        href={href}
+        aria-current={isActive ? 'true' : undefined}
+        class:list={['lang-link', { active: isActive }]}
+        data-locale={target}
+      >
+        {LOCALE_LABELS[target]}
+      </a>
+    );
+  })}
+</nav>
+
+<style>
+  .language-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .lang-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    min-width: 36px;
+    transition: color 120ms ease, background-color 120ms ease;
+  }
+  .lang-link + .lang-link {
+    border-left: 1px solid var(--color-border);
+  }
+  .lang-link:hover {
+    color: var(--color-text);
+  }
+  .lang-link.active {
+    color: var(--color-bg);
+    background-color: var(--color-accent);
+  }
+</style>
+
+<script>
+  // Persist language preference
+  document.querySelectorAll('.lang-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      const locale = link.getAttribute('data-locale');
+      if (locale) {
+        try {
+          localStorage.setItem('tobvision-locale', locale);
+        } catch {
+          /* storage blocked */
+        }
+      }
+    });
+  });
+</script>

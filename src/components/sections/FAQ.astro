@@ -1,0 +1,130 @@
+---
+import { getContent } from '../../content';
+import type { Locale } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getContent(locale);
+const { faq } = t;
+---
+
+<section class="faq" aria-labelledby="faq-title">
+  <div class="container-content">
+    <header class="faq-head">
+      <span class="accent-line"></span>
+      <h2 id="faq-title" class="section-title">{faq.title}</h2>
+    </header>
+    <div class="faq-list">
+      {faq.items.map((item, idx) => (
+        <details class="faq-item" name="faq">
+          <summary class="faq-summary">
+            <span class="faq-idx">{String(idx + 1).padStart(2, '0')}</span>
+            <span class="faq-q">{item.q}</span>
+            <span class="faq-toggle" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+          </summary>
+          <div class="faq-answer">
+            <p>{item.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    padding: 64px 0;
+  }
+  @media (min-width: 768px) {
+    .faq {
+      padding: 96px 0;
+    }
+  }
+  .faq-head {
+    max-width: 40rem;
+    margin-bottom: 40px;
+  }
+  .faq-head .accent-line {
+    margin-bottom: 20px;
+  }
+  .faq-list {
+    max-width: 54rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--color-border);
+  }
+  .faq-summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 22px 8px;
+    min-height: 44px;
+    transition: background-color 150ms ease;
+  }
+  .faq-summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-summary:hover {
+    background-color: rgba(240, 237, 232, 0.02);
+  }
+  .faq-idx {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--color-accent);
+    letter-spacing: 0.04em;
+    min-width: 32px;
+    padding-top: 2px;
+  }
+  .faq-q {
+    flex: 1;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1rem, 2.1vw, 1.125rem);
+    line-height: 1.4;
+    color: var(--color-text);
+    padding-right: 16px;
+  }
+  .faq-toggle {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    transition: transform 200ms ease;
+  }
+  .faq-item[open] .faq-toggle {
+    transform: rotate(180deg);
+  }
+  .faq-answer {
+    padding: 0 8px 24px 56px;
+  }
+  .faq-answer p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    max-width: 44rem;
+  }
+  @media (max-width: 520px) {
+    .faq-answer {
+      padding-left: 8px;
+    }
+  }
+</style>

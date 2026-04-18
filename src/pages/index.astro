@@ -1,0 +1,20 @@
+---
+// Root redirect page — Netlify `_redirects` handles the 301 in production.
+// This file provides a local-dev + no-js fallback via meta-refresh.
+---
+
+<!doctype html>
+<html lang="de-DE">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TobVision</title>
+    <link rel="canonical" href="https://tobvision.de/de/" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta http-equiv="refresh" content="0; url=/de/" />
+    <script>window.location.replace('/de/');</script>
+  </head>
+  <body>
+    <p><a href="/de/">Weiter zur deutschen Version</a></p>
+  </body>
+</html>

@@ -1,0 +1,148 @@
+---
+interface Props {
+  mediaId: string;
+  label: string;
+}
+
+const { mediaId, label } = Astro.props;
+---
+
+<div class="wistia-facade" data-media-id={mediaId} role="region" aria-label={label}>
+  <button type="button" class="wistia-facade-button" aria-label={label}>
+    <img
+      src={`https://fast.wistia.com/embed/medias/${mediaId}/swatch`}
+      alt=""
+      loading="lazy"
+      decoding="async"
+      class="wistia-thumb"
+    />
+    <span class="wistia-play" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 4l14 8-14 8V4z" fill="currentColor" />
+      </svg>
+    </span>
+    <span class="sr-only">{label}</span>
+  </button>
+</div>
+
+<style>
+  .wistia-facade {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.7);
+  }
+  .wistia-facade-button {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  .wistia-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 250ms ease, filter 250ms ease;
+  }
+  .wistia-facade-button:hover .wistia-thumb {
+    transform: scale(1.02);
+    filter: brightness(1.05);
+  }
+  .wistia-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 76px;
+    height: 76px;
+    border-radius: 999px;
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 40px rgba(200, 150, 62, 0.35);
+    transition: transform 200ms ease, background-color 200ms ease;
+  }
+  .wistia-play svg {
+    margin-left: 4px;
+  }
+  .wistia-facade-button:hover .wistia-play {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+  .wistia-facade-button:focus-visible .wistia-play {
+    outline: 3px solid var(--color-text);
+    outline-offset: 4px;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .wistia-facade.is-loading .wistia-play {
+    opacity: 0.4;
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+  }
+</style>
+
+<script>
+  // Lazy-load Wistia player only on click.
+  // Legal basis for US data transfer (Art. 49 Abs. 1 lit. a DSGVO) - consent via active play-click.
+  const facades = document.querySelectorAll<HTMLElement>('.wistia-facade');
+
+  facades.forEach((facade) => {
+    const button = facade.querySelector<HTMLButtonElement>('.wistia-facade-button');
+    const mediaId = facade.dataset.mediaId;
+    if (!button || !mediaId) return;
+
+    let loaded = false;
+
+    button.addEventListener('click', () => {
+      if (loaded) return;
+      loaded = true;
+      facade.classList.add('is-loading');
+
+      const loader = document.createElement('script');
+      loader.src = 'https://fast.wistia.com/player.js';
+      loader.async = true;
+      document.head.appendChild(loader);
+
+      const mediaScript = document.createElement('script');
+      mediaScript.src = `https://fast.wistia.com/embed/${mediaId}.js`;
+      mediaScript.async = true;
+      mediaScript.type = 'module';
+      document.head.appendChild(mediaScript);
+
+      const wrapper = document.createElement('div');
+      wrapper.style.position = 'absolute';
+      wrapper.style.inset = '0';
+
+      const player = document.createElement('wistia-player');
+      player.setAttribute('media-id', mediaId);
+      player.setAttribute('aspect', '1.7777777777777777');
+      player.setAttribute('autoplay', 'true');
+      wrapper.appendChild(player);
+
+      facade.replaceChildren(wrapper);
+      facade.classList.remove('is-loading');
+    });
+  });
+</script>

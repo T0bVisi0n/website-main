@@ -1,0 +1,89 @@
+---
+import { getContent } from '../../content';
+import type { Locale } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getContent(locale);
+const { finalCta, header } = t;
+---
+
+<section class="final-cta" aria-labelledby="final-cta-title">
+  <div class="container-content final-cta-inner">
+    <span class="accent-line"></span>
+    <h2 id="final-cta-title" class="final-cta-title">{finalCta.title}</h2>
+    <p class="final-cta-body">{finalCta.body}</p>
+    <a href={header.ctaHref} class="btn-primary final-cta-btn">
+      {finalCta.ctaLabel}
+      <span aria-hidden="true">→</span>
+    </a>
+    <p class="final-cta-subline">{finalCta.subline}</p>
+  </div>
+</section>
+
+<style>
+  .final-cta {
+    padding: 64px 0 96px;
+    background:
+      linear-gradient(180deg, rgba(20, 30, 73, 0.25), rgba(20, 20, 20, 0) 80%),
+      var(--color-bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .final-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(600px 300px at 50% 20%, rgba(200, 150, 62, 0.1), transparent 70%);
+    z-index: 0;
+  }
+  @media (min-width: 768px) {
+    .final-cta {
+      padding: 96px 0 128px;
+    }
+  }
+  .final-cta-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 52rem;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .final-cta-inner .accent-line {
+    margin-bottom: 4px;
+  }
+  .final-cta-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--color-text);
+  }
+  .final-cta-body {
+    margin: 0;
+    font-size: clamp(1rem, 2.2vw, 1.125rem);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    max-width: 38rem;
+  }
+  .final-cta-btn {
+    margin-top: 12px;
+    font-size: 15px;
+    padding: 16px 32px;
+    min-height: 52px;
+  }
+  .final-cta-subline {
+    margin: 0;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+</style>

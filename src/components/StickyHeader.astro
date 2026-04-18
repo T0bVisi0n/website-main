@@ -1,0 +1,97 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/tobvision-logo.png';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { getContent } from '../content';
+import type { Locale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  pathname: string;
+}
+
+const { locale, pathname } = Astro.props;
+const t = getContent(locale);
+const homeHref = `/${locale}/`;
+---
+
+<header class="sticky-header" aria-label="Seitenkopf">
+  <div class="container-content header-inner">
+    <a href={homeHref} class="logo-link" aria-label={t.header.logoAlt}>
+      <Image
+        src={logo}
+        alt={t.header.logoAlt}
+        widths={[120, 180, 240]}
+        sizes="180px"
+        loading="eager"
+        class="logo-img"
+      />
+    </a>
+    <div class="header-actions">
+      <LanguageSwitcher locale={locale} pathname={pathname} />
+      <a href={t.header.ctaHref} class="btn-primary header-cta">
+        {t.header.ctaLabel}
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    background-color: rgba(20, 20, 20, 0.92);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .logo-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .logo-img {
+    height: 28px;
+    width: auto;
+    display: block;
+  }
+  @media (min-width: 768px) {
+    .logo-img {
+      height: 32px;
+    }
+  }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .header-cta {
+    padding: 10px 18px;
+    font-size: 13px;
+    min-height: 42px;
+  }
+  @media (min-width: 768px) {
+    .header-cta {
+      padding: 12px 22px;
+      font-size: 14px;
+      min-height: 44px;
+    }
+  }
+  @media (max-width: 520px) {
+    .header-cta {
+      padding: 10px 14px;
+      font-size: 12px;
+    }
+  }
+</style>

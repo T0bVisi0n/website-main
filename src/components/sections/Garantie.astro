@@ -1,0 +1,101 @@
+---
+import { getContent } from '../../content';
+import type { Locale } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getContent(locale);
+const { garantie } = t;
+---
+
+<section class="garantie" aria-labelledby="garantie-title">
+  <div class="container-content">
+    <div class="garantie-card">
+      <span class="garantie-badge">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path
+            d="M12 2L3 6v6c0 5.25 3.75 10.125 9 11 5.25-.875 9-5.75 9-11V6l-9-4z"
+            stroke="currentColor"
+            stroke-width="1.5"
+            fill="none"
+          />
+          <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>Garantie</span>
+      </span>
+      <h2 id="garantie-title" class="garantie-title">{garantie.title}</h2>
+      <p class="garantie-body">{garantie.body}</p>
+      <p class="garantie-note">{garantie.note}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .garantie {
+    padding: 32px 0 64px;
+  }
+  @media (min-width: 768px) {
+    .garantie {
+      padding: 48px 0 96px;
+    }
+  }
+  .garantie-card {
+    max-width: 54rem;
+    margin: 0 auto;
+    position: relative;
+    background:
+      linear-gradient(180deg, rgba(20, 30, 73, 0.45), rgba(20, 30, 73, 0.15)),
+      var(--color-surface);
+    border: 1px solid rgba(200, 150, 62, 0.3);
+    border-radius: 14px;
+    padding: 36px 28px;
+  }
+  @media (min-width: 768px) {
+    .garantie-card {
+      padding: 48px 48px;
+    }
+  }
+  .garantie-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background-color: rgba(200, 150, 62, 0.12);
+    color: var(--color-accent);
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .garantie-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3.5vw, 2.125rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 0 0 20px;
+    color: var(--color-text);
+  }
+  .garantie-body {
+    margin: 0 0 20px;
+    font-size: clamp(1rem, 2.2vw, 1.125rem);
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+  .garantie-note {
+    margin: 0;
+    padding: 16px 18px;
+    background-color: rgba(240, 237, 232, 0.04);
+    border-left: 2px solid var(--color-accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+</style>

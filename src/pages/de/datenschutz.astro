@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getContent } from '../../content';
+
+const locale = 'de' as const;
+const t = getContent(locale);
+---
+
+<BaseLayout
+  locale={locale}
+  title={t.datenschutz.title}
+  description="Datenschutzerklärung der TobVision Marketing LLC - eingebundene Drittanbieter, Rechtsgrundlagen, Nutzerrechte."
+  pathname="/de/datenschutz/"
+>
+  <article class="legal-page">
+    <div class="container-content">
+      <h1>Datenschutzerklärung</h1>
+      <p class="lead">Stand: 17. April 2026</p>
+
+      <h2>1. Verantwortlicher</h2>
+      <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist:</p>
+      <p>
+        Tobias Huber<br />
+        TobVision Marketing LLC<br />
+        3833 Powerline Rd, Suite 201<br />
+        Fort Lauderdale, FL 33309<br />
+        USA
+      </p>
+      <p>E-Mail: <a href="mailto:tobias@tobvision.com">tobias@tobvision.com</a></p>
+
+      <h2>2. Zugriffsdaten</h2>
+      <p>Beim Besuch dieser Website werden automatisch Informationen erfasst, die Ihr Browser übermittelt. Dazu gehören:</p>
+      <ul>
+        <li>IP-Adresse</li>
+        <li>Browsertyp und -version</li>
+        <li>Betriebssystem</li>
+        <li>Referrer-URL</li>
+        <li>Datum und Uhrzeit des Zugriffs</li>
+        <li>Übertragene Datenmenge</li>
+      </ul>
+      <p>Diese Daten werden durch den Hosting-Anbieter (siehe Abschnitt 7.3) zur technischen Bereitstellung, Sicherheit und Stabilität der Website verarbeitet.</p>
+      <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am sicheren Betrieb der Website).</p>
+
+      <h2>3. Kontaktaufnahme</h2>
+      <p>Wenn Sie per E-Mail oder über die eingebundene Terminbuchung (siehe Abschnitt 7.2) Kontakt aufnehmen, werden Ihre Angaben zur Bearbeitung der Anfrage gespeichert. Die Daten werden nicht ohne Ihre Einwilligung an unbeteiligte Dritte weitergegeben.</p>
+      <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (Durchführung vorvertraglicher Maßnahmen).</p>
+
+      <h2>4. Cookies</h2>
+      <p>
+        Diese Website verwendet <strong>keine Tracking-Cookies zu Marketingzwecken</strong>. Technisch notwendige
+        Cookies können durch eingebundene Drittanbieter (siehe Abschnitt 7) gesetzt werden - ausschließlich nach
+        aktiver Nutzerhandlung (z.B. Video-Klick, Terminbuchung). Die Reichweitenmessung über Cloudflare Web
+        Analytics (Abschnitt 7.4) erfolgt vollständig cookie-frei.
+      </p>
+
+      <h2>5. Ihre Rechte</h2>
+      <p>Sie haben jederzeit das Recht auf:</p>
+      <ul>
+        <li><strong>Auskunft</strong> über Ihre gespeicherten Daten (Art. 15 DSGVO)</li>
+        <li><strong>Berichtigung</strong> unrichtiger Daten (Art. 16 DSGVO)</li>
+        <li><strong>Löschung</strong> Ihrer Daten (Art. 17 DSGVO)</li>
+        <li><strong>Einschränkung</strong> der Verarbeitung (Art. 18 DSGVO)</li>
+        <li><strong>Datenübertragbarkeit</strong> (Art. 20 DSGVO)</li>
+        <li><strong>Widerspruch</strong> gegen die Verarbeitung (Art. 21 DSGVO)</li>
+        <li><strong>Beschwerde</strong> bei einer Datenschutzaufsichtsbehörde</li>
+      </ul>
+      <p>Zur Ausübung Ihrer Rechte wenden Sie sich an die in Abschnitt 1 genannten Kontaktdaten.</p>
+
+      <h2>6. Änderungen</h2>
+      <p>Diese Datenschutzerklärung kann bei rechtlichen oder technischen Änderungen angepasst werden. Die jeweils aktuelle Fassung ist auf dieser Website abrufbar.</p>
+
+      <h2>7. Eingebundene Drittanbieter</h2>
+
+      <h3>7.1 Wistia (Video-Hosting)</h3>
+      <p>Diese Website bindet Videos über Wistia ein.</p>
+      <p><strong>Anbieter:</strong> Wistia, Inc., 17 Tudor Street, Cambridge, MA 02139, USA</p>
+      <p>
+        Das Video wird erst geladen und abgespielt, wenn Sie aktiv auf den Play-Button klicken
+        (Lazy-Load-Prinzip). Beim Abspielen kann Wistia folgende Daten verarbeiten:
+      </p>
+      <ul>
+        <li>IP-Adresse</li>
+        <li>Browser- und Geräteinformationen</li>
+        <li>Interaktionsdaten mit dem Video (Play, Pause, Fortschritt)</li>
+        <li>Cookies zur anonymen Wiedergabestatistik</li>
+      </ul>
+      <p>
+        <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung durch aktives Video-Abspielen)
+        in Verbindung mit Art. 49 Abs. 1 lit. a DSGVO (Datenübermittlung in die USA auf Basis ausdrücklicher
+        Einwilligung).
+      </p>
+      <p><strong>Datenschutzerklärung Wistia:</strong> <a href="https://wistia.com/privacy" target="_blank" rel="noopener">wistia.com/privacy</a></p>
+
+      <h3>7.2 TidyCal (Terminbuchung)</h3>
+      <p>Für die Vereinbarung von Gesprächsterminen nutzen wir TidyCal.</p>
+      <p><strong>Anbieter:</strong> Sumo Group Inc. (AppSumo / TidyCal), Austin, Texas, USA</p>
+      <p>Bei einer Terminbuchung übermitteln Sie folgende Daten direkt an TidyCal:</p>
+      <ul>
+        <li>Name</li>
+        <li>E-Mail-Adresse</li>
+        <li>Ausgewählter Termin</li>
+        <li>Optionale Angaben aus dem Buchungsformular</li>
+      </ul>
+      <p>
+        <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (Durchführung vorvertraglicher Maßnahmen)
+        in Verbindung mit Art. 49 Abs. 1 lit. b DSGVO (Datenübermittlung in die USA zur Vertragsanbahnung).
+      </p>
+      <p><strong>Datenschutzerklärung TidyCal:</strong> <a href="https://tidycal.com/privacy" target="_blank" rel="noopener">tidycal.com/privacy</a></p>
+
+      <h3>7.3 Netlify (Hosting)</h3>
+      <p>Diese Website wird gehostet bei Netlify.</p>
+      <p><strong>Anbieter:</strong> Netlify, Inc., 44 Montgomery Street, Suite 300, San Francisco, CA 94104, USA</p>
+      <p>Beim Aufruf der Website verarbeitet Netlify die in Abschnitt 2 genannten Zugriffsdaten zur technischen Bereitstellung.</p>
+      <p>
+        <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am sicheren Betrieb
+        der Website) in Verbindung mit Art. 46 DSGVO (Datenübermittlung in die USA auf Basis der
+        EU-Standardvertragsklauseln).
+      </p>
+      <p><strong>Datenschutzerklärung Netlify:</strong> <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">netlify.com/privacy</a></p>
+
+      <h3>7.4 Cloudflare Web Analytics</h3>
+      <p>Zur anonymisierten Reichweitenmessung nutzen wir Cloudflare Web Analytics.</p>
+      <p><strong>Anbieter:</strong> Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, USA</p>
+      <p>
+        Cloudflare Web Analytics arbeitet vollständig cookie-frei, speichert keine personenbezogenen Daten und
+        führt kein Cross-Site-Tracking durch. Erfasst werden ausschließlich anonymisierte Aggregate
+        (Seitenaufrufe, Referrer, Browser-Typ, Land).
+      </p>
+      <p>
+        <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der
+        datenschutzkonformen Reichweitenmessung ohne Eingriff in die Privatsphäre der Nutzer) in Verbindung mit
+        Art. 46 DSGVO (Datenübermittlung in die USA auf Basis der EU-Standardvertragsklauseln).
+      </p>
+      <p><strong>Datenschutzerklärung Cloudflare:</strong> <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a></p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding: 48px 0 96px;
+  }
+  @media (min-width: 768px) {
+    .legal-page {
+      padding: 72px 0 128px;
+    }
+  }
+  .legal-page :global(.container-content) {
+    max-width: 48rem;
+  }
+  .legal-page h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 4.5vw, 2.5rem);
+    letter-spacing: -0.015em;
+    margin: 0 0 12px;
+  }
+  .legal-page h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin: 36px 0 12px;
+    color: var(--color-text);
+    letter-spacing: 0.01em;
+  }
+  .legal-page h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    margin: 24px 0 8px;
+    color: var(--color-accent);
+  }
+  .legal-page p {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin: 0 0 12px;
+  }
+  .legal-page .lead {
+    color: var(--color-text-muted);
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+  .legal-page ul {
+    margin: 0 0 16px;
+    padding-left: 20px;
+    color: var(--color-text);
+  }
+  .legal-page li {
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 4px;
+  }
+  .legal-page a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .legal-page a:hover {
+    color: var(--color-accent-hover);
+  }
+  .legal-page strong {
+    font-weight: 600;
+  }
+</style>

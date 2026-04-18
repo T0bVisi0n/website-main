@@ -1,0 +1,182 @@
+---
+import { Image } from 'astro:assets';
+import headshot from '../../assets/tobias-huber.jpg';
+import { getContent } from '../../content';
+import type { Locale } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getContent(locale);
+const { hero, header } = t;
+---
+
+<section class="hero" aria-labelledby="hero-headline">
+  <div class="container-content hero-inner">
+    <div class="hero-text">
+      <p class="section-label">Conversion Copy Sprint</p>
+      <h1 id="hero-headline" class="hero-headline">
+        <span class="headline-line">{hero.headline.line1}</span>
+        <span class="headline-line accent">{hero.headline.line2}</span>
+      </h1>
+      <p class="hero-sub">{hero.subheadline}</p>
+      <div class="hero-cta-wrap">
+        <a href={header.ctaHref} class="btn-primary hero-cta">
+          {hero.ctaLabel}
+          <span aria-hidden="true" class="arrow">→</span>
+        </a>
+        <p class="hero-subline">{hero.ctaSubline}</p>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-frame">
+        <Image
+          src={headshot}
+          alt={hero.photoAlt}
+          widths={[320, 480, 640]}
+          sizes="(min-width: 1024px) 420px, (min-width: 640px) 360px, 280px"
+          loading="eager"
+          quality={82}
+          class="hero-photo"
+        />
+      </div>
+      <p class="hero-photo-caption">{hero.photoCaption}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 48px 0 64px;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .hero {
+      padding: 72px 0 96px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .hero {
+      padding: 96px 0 120px;
+    }
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(700px 400px at 85% 30%, rgba(200, 150, 62, 0.08), transparent 70%),
+      radial-gradient(500px 300px at 10% 80%, rgba(20, 30, 73, 0.6), transparent 70%);
+    z-index: 0;
+  }
+  .hero-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: center;
+    z-index: 1;
+  }
+  @media (min-width: 1024px) {
+    .hero-inner {
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: 64px;
+    }
+  }
+  .section-label {
+    margin: 0 0 16px;
+  }
+  .hero-headline {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    font-size: clamp(2rem, 5.5vw, 3.5rem);
+    margin: 0;
+  }
+  .headline-line {
+    display: block;
+  }
+  .headline-line.accent {
+    color: var(--color-accent);
+  }
+  .hero-sub {
+    margin: 24px 0 0;
+    max-width: 52ch;
+    font-size: clamp(1rem, 2.2vw, 1.125rem);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+  .hero-cta-wrap {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .hero-cta .arrow {
+    transition: transform 150ms ease;
+  }
+  .hero-cta:hover .arrow {
+    transform: translateX(3px);
+  }
+  .hero-subline {
+    margin: 0;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+  .hero-photo-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  @media (min-width: 1024px) {
+    .hero-photo-wrap {
+      align-items: flex-end;
+    }
+  }
+  .hero-photo-frame {
+    position: relative;
+    width: 260px;
+    aspect-ratio: 4 / 5;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
+  }
+  @media (min-width: 640px) {
+    .hero-photo-frame {
+      width: 320px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .hero-photo-frame {
+      width: 380px;
+    }
+  }
+  .hero-photo-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(20, 20, 20, 0.3) 100%);
+    pointer-events: none;
+  }
+  .hero-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-photo-caption {
+    margin: 0;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+</style>

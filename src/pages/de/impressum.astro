@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getContent } from '../../content';
+
+const locale = 'de' as const;
+const t = getContent(locale);
+---
+
+<BaseLayout
+  locale={locale}
+  title={t.impressum.title}
+  description="Impressum der TobVision Marketing LLC."
+  pathname="/de/impressum/"
+>
+  <article class="legal-page">
+    <div class="container-content">
+      <h1>Impressum</h1>
+
+      <p class="lead">Angaben gemäß §5 TMG (ergänzt für Anbieter mit Sitz außerhalb Deutschlands):</p>
+
+      <h2>Anbieter</h2>
+      <p>
+        <strong>TobVision Marketing LLC</strong><br />
+        3833 Powerline Rd, Suite 201<br />
+        Fort Lauderdale, FL 33309<br />
+        USA
+      </p>
+
+      <h2>Vertreten durch</h2>
+      <p>Tobias Huber</p>
+
+      <h2>Kontakt</h2>
+      <p>
+        Telefon: +49 156 79655947<br />
+        E-Mail: <a href="mailto:tobias@tobvision.com">tobias@tobvision.com</a>
+      </p>
+
+      <h2>Steuer-Identifikation</h2>
+      <p>EIN (Employer Identification Number, USA): 33-2369939</p>
+
+      <h2>Hinweis</h2>
+      <p>Dieses Angebot richtet sich ausschließlich an Geschäftskunden (B2B).</p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding: 48px 0 96px;
+  }
+  @media (min-width: 768px) {
+    .legal-page {
+      padding: 72px 0 128px;
+    }
+  }
+  .legal-page :global(.container-content) {
+    max-width: 46rem;
+  }
+  .legal-page h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 4.5vw, 2.5rem);
+    letter-spacing: -0.015em;
+    margin: 0 0 24px;
+  }
+  .legal-page h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin: 32px 0 8px;
+    color: var(--color-accent);
+    letter-spacing: 0.01em;
+  }
+  .legal-page p {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin: 0 0 12px;
+  }
+  .legal-page .lead {
+    color: var(--color-text-muted);
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+  .legal-page a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .legal-page a:hover {
+    color: var(--color-accent-hover);
+  }
+</style>

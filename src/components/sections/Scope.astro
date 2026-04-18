@@ -1,0 +1,151 @@
+---
+import { getContent } from '../../content';
+import type { Locale } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getContent(locale);
+const { scope, header } = t;
+---
+
+<section class="scope" aria-labelledby="scope-title">
+  <div class="container-content">
+    <header class="scope-head">
+      <span class="accent-line"></span>
+      <h2 id="scope-title" class="section-title">{scope.title}</h2>
+      <p class="scope-subtitle">{scope.subtitle}</p>
+    </header>
+
+    <div class="scope-card">
+      <div class="scope-blocks">
+        {scope.blocks.map((block) => (
+          <div class="scope-block">
+            <h3 class="block-label">{block.label}</h3>
+            <ul class="block-list">
+              {block.items.map((item) => (
+                <li>
+                  <span class="check" aria-hidden="true">·</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <p class="scope-delivery">{scope.delivery}</p>
+    </div>
+
+    <div class="scope-cta-wrap">
+      <a href={header.ctaHref} class="btn-primary">
+        {scope.ctaLabel}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .scope {
+    padding: 64px 0;
+  }
+  @media (min-width: 768px) {
+    .scope {
+      padding: 96px 0;
+    }
+  }
+  .scope-head {
+    max-width: 40rem;
+    margin-bottom: 40px;
+  }
+  .scope-head .accent-line {
+    margin-bottom: 20px;
+  }
+  .scope-subtitle {
+    margin: 12px 0 0;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .scope-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 32px 28px;
+  }
+  @media (min-width: 768px) {
+    .scope-card {
+      padding: 48px 40px;
+    }
+  }
+  .scope-blocks {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  @media (min-width: 768px) {
+    .scope-blocks {
+      gap: 36px;
+    }
+  }
+  .scope-block {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-bottom: 28px;
+    border-bottom: 1px dashed rgba(240, 237, 232, 0.08);
+  }
+  .scope-block:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .block-label {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--color-accent);
+    letter-spacing: 0.01em;
+  }
+  .block-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .block-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+  .check {
+    color: var(--color-accent);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .scope-delivery {
+    margin: 32px 0 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border);
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.02em;
+  }
+  .scope-cta-wrap {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+import WistiaFacade from './WistiaFacade.astro';
+import { getContent } from '../../content';
+import type { Locale } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getContent(locale);
+const { videoProof } = t;
+---
+
+<section class="video-proof" aria-labelledby="video-frame">
+  <div class="container-content">
+    <p id="video-frame" class="video-frame">
+      {videoProof.frame}
+    </p>
+    <div class="video-wrap">
+      <WistiaFacade mediaId={videoProof.wistiaId} label={videoProof.videoLabel} />
+    </div>
+    <p class="video-caption">{videoProof.caption}</p>
+  </div>
+</section>
+
+<style>
+  .video-proof {
+    padding: 32px 0 64px;
+  }
+  @media (min-width: 768px) {
+    .video-proof {
+      padding: 48px 0 96px;
+    }
+  }
+  .video-frame {
+    max-width: 42rem;
+    margin: 0 auto 28px;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    color: var(--color-text);
+  }
+  .video-wrap {
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+  .video-caption {
+    margin: 16px auto 0;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+</style>

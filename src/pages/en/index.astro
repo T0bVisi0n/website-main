@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getContent } from '../../content';
+
+const locale = 'en' as const;
+const t = getContent(locale);
+const { placeholder, header } = t;
+---
+
+<BaseLayout
+  locale={locale}
+  title={t.meta.title}
+  description={t.meta.description}
+  ogTitle={t.meta.ogTitle}
+  ogDescription={t.meta.ogDescription}
+  pathname="/en/"
+>
+  <section class="placeholder-section">
+    <div class="container-content placeholder-inner">
+      <span class="accent-line"></span>
+      <h1 class="placeholder-title">{placeholder.title}</h1>
+      <p class="placeholder-body">{placeholder.body}</p>
+
+      <div class="placeholder-options">
+        <p class="options-heading">In the meantime:</p>
+        <ul>
+          {placeholder.options.map((opt) => (
+            <li>{opt}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="placeholder-actions">
+        <a href={placeholder.switchToGermanHref} class="btn-ghost">
+          ← {placeholder.switchToGermanLabel}
+        </a>
+        <a href={header.ctaHref} class="btn-primary">
+          {placeholder.ctaLabel} →
+        </a>
+      </div>
+
+      <p class="placeholder-closing">{placeholder.closing}</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .placeholder-section {
+    padding: 64px 0 96px;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+  }
+  @media (min-width: 768px) {
+    .placeholder-section {
+      padding: 96px 0 128px;
+    }
+  }
+  .placeholder-inner {
+    max-width: 44rem;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .placeholder-inner .accent-line {
+    margin-bottom: 4px;
+  }
+  .placeholder-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--color-text);
+  }
+  .placeholder-body {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  .placeholder-options {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-top: 8px;
+  }
+  .options-heading {
+    margin: 0 0 10px;
+    color: var(--color-accent);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .placeholder-options ul {
+    margin: 0;
+    padding: 0 0 0 18px;
+    color: var(--color-text);
+  }
+  .placeholder-options li {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+  .placeholder-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .placeholder-closing {
+    margin: 24px 0 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+    font-size: 14px;
+  }
+</style>

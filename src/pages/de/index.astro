@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/sections/Hero.astro';
+import VideoProof from '../../components/sections/VideoProof.astro';
+import Mechanism from '../../components/sections/Mechanism.astro';
+import Scope from '../../components/sections/Scope.astro';
+import Inklusive from '../../components/sections/Inklusive.astro';
+import Garantie from '../../components/sections/Garantie.astro';
+import FAQ from '../../components/sections/FAQ.astro';
+import AboutMe from '../../components/sections/AboutMe.astro';
+import FinalCTA from '../../components/sections/FinalCTA.astro';
+import { getContent } from '../../content';
+
+const locale = 'de' as const;
+const t = getContent(locale);
+---
+
+<BaseLayout
+  locale={locale}
+  title={t.meta.title}
+  description={t.meta.description}
+  ogTitle={t.meta.ogTitle}
+  ogDescription={t.meta.ogDescription}
+  pathname="/de/"
+  includeJsonLd={true}
+>
+  <Hero locale={locale} />
+  <VideoProof locale={locale} />
+  <Mechanism locale={locale} />
+  <Scope locale={locale} />
+  <Inklusive locale={locale} />
+  <Garantie locale={locale} />
+  <FAQ locale={locale} />
+  <AboutMe locale={locale} />
+  <FinalCTA locale={locale} />
+</BaseLayout>

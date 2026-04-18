@@ -1,0 +1,163 @@
+---
+import { Image } from 'astro:assets';
+import headshot from '../../assets/tobias-huber.jpg';
+import tuev from '../../assets/tuev-rheinland-testmark.png';
+import signature from '../../assets/tobias-huber-signature.png';
+import { getContent } from '../../content';
+import type { Locale } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getContent(locale);
+const { about } = t;
+---
+
+<section class="about" aria-labelledby="about-title">
+  <div class="tuev-bg" aria-hidden="true">
+    <Image
+      src={tuev}
+      alt=""
+      widths={[320, 480]}
+      sizes="360px"
+      loading="lazy"
+      quality={70}
+      class="tuev-img"
+    />
+  </div>
+  <div class="container-content about-inner">
+    <div class="about-photo-wrap">
+      <Image
+        src={headshot}
+        alt={about.photoAlt}
+        widths={[400, 560, 720]}
+        sizes="(min-width: 1024px) 420px, (min-width: 640px) 360px, 280px"
+        loading="lazy"
+        quality={82}
+        class="about-photo"
+      />
+      <p class="about-photo-caption">{about.photoCaption}</p>
+    </div>
+    <div class="about-body">
+      <span class="accent-line"></span>
+      <h2 id="about-title" class="section-title">{about.title}</h2>
+      <div class="about-text">
+        {about.paragraphs.map((p) => (
+          <p>{p}</p>
+        ))}
+      </div>
+      <div class="about-signature">
+        <Image
+          src={signature}
+          alt={about.signatureAlt}
+          widths={[160, 220]}
+          sizes="180px"
+          loading="lazy"
+          quality={80}
+          class="signature-img"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    position: relative;
+    padding: 64px 0;
+    background-color: var(--color-bg);
+    overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .about {
+      padding: 96px 0;
+    }
+  }
+  .tuev-bg {
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
+    width: 360px;
+  }
+  @media (min-width: 1024px) {
+    .tuev-bg {
+      right: 40px;
+      width: 440px;
+      opacity: 0.08;
+    }
+  }
+  .tuev-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: grayscale(1) brightness(1.4);
+  }
+  .about-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+    align-items: start;
+    z-index: 1;
+  }
+  @media (min-width: 1024px) {
+    .about-inner {
+      grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+      gap: 64px;
+    }
+  }
+  .about-photo-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 320px;
+  }
+  .about-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+  }
+  .about-photo-caption {
+    margin: 0;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+  .about-body .accent-line {
+    margin-bottom: 20px;
+  }
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+    max-width: 44rem;
+  }
+  .about-text p {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+  .about-signature {
+    margin-top: 32px;
+  }
+  .signature-img {
+    width: 180px;
+    height: auto;
+    display: block;
+    opacity: 0.85;
+    filter: brightness(1.4) contrast(1.05);
+  }
+</style>

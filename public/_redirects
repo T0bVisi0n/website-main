@@ -1,0 +1,7 @@
+# Root redirect - DE is default locale
+/                       /de/                  301
+
+# Locale-aware 404s (Netlify sends these if nothing else matches)
+/de/*                   /de/404/index.html    404
+/en/*                   /en/404/index.html    404
+/*                      /de/404/index.html    404
