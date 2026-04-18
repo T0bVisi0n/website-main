@@ -9,6 +9,11 @@ interface Props {
 const { locale } = Astro.props;
 const t = getContent(locale);
 const { inklusive } = t;
+
+function splitParenthetical(title: string): { main: string; qualifier: string | null } {
+  const match = title.match(/^(.+?)\s*\(([^)]+)\)\s*$/);
+  return match ? { main: match[1], qualifier: match[2] } : { main: title, qualifier: null };
+}
 ---
 
 <section class="inklusive reveal" aria-labelledby="inklusive-title">
@@ -19,13 +24,19 @@ const { inklusive } = t;
       <p class="inklusive-intro">{inklusive.intro}</p>
     </header>
     <div class="inklusive-grid reveal-stagger">
-      {inklusive.blocks.map((block) => (
-        <article class="inklusive-card">
-          <span class="card-number">{block.number}</span>
-          <h3 class="card-title">{block.title}</h3>
-          <p class="card-body">{block.body}</p>
-        </article>
-      ))}
+      {inklusive.blocks.map((block) => {
+        const { main, qualifier } = splitParenthetical(block.title);
+        return (
+          <article class="inklusive-card">
+            <span class="card-number">{block.number}</span>
+            <div class="card-head">
+              <h3 class="card-title">{main}</h3>
+              {qualifier && <p class="card-meta">{qualifier}</p>}
+            </div>
+            <p class="card-body">{block.body}</p>
+          </article>
+        );
+      })}
     </div>
   </div>
 </section>
@@ -84,6 +95,11 @@ const { inklusive } = t;
     color: var(--color-accent);
     letter-spacing: 0;
   }
+  .card-head {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
   .card-title {
     margin: 0;
     font-family: var(--font-display);
@@ -91,6 +107,15 @@ const { inklusive } = t;
     font-size: 18px;
     line-height: 1.3;
     color: var(--color-text);
+  }
+  .card-meta {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
   }
   .card-body {
     margin: 0;

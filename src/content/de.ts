@@ -146,8 +146,8 @@ export const de = {
         a: 'AI schreibt Text in ~30 Sekunden. Was es überspringt: die Frage was euer Buyer glauben muss bevor er kauft. Die Analyse warum die aktuelle LP nicht konvertiert. Die drei Einwände die euer Endkunden-ICP hat. Das ist der Teil den ihr kauft.',
       },
       {
-        q: 'Keine Agency-Referenzen - warum soll ich trotzdem buchen?',
-        a: 'Stimmt, (noch) keine. Deshalb das Testprojekt mit klarem Scope: du siehst mein Prozess und das Ergebnis bevor du dich für mehr entscheidest.',
+        q: 'Warum keine Kundenlogos oder Case-Studies?',
+        a: 'Die Projekte die ich bisher gemacht hab liefen unter NDA als Subcontractor für Agenturen - deren Kunden-LPs, deren Brand. Also Projekte geliefert, Zahlen gesehen, Logos die ich nicht zeigen darf. Mit TobVision ist das anders: transparent, unter eigenem Namen. Der Sprint ist dein direkter Blick auf Prozess + Ergebnis, bevor du dich für mehr entscheidest.',
       },
       {
         q: 'Wie läuft die Zusammenarbeit remote?',
