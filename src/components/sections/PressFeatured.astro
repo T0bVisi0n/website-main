@@ -1,8 +1,8 @@
 ---
 import { Image } from 'astro:assets';
-import logoT3n from '../../assets/press-t3n.png';
-import logoStartupValley from '../../assets/press-startup-valley.png';
-import logoLifePR from '../../assets/press-lifepr.png';
+import logoT3n from '../../assets/press-t3n-light.png';
+import logoStartupValley from '../../assets/press-startup-valley-light.png';
+import logoLifePR from '../../assets/press-lifepr-light.png';
 import { getContent } from '../../content';
 import type { Locale } from '../../i18n/utils';
 
@@ -110,19 +110,16 @@ const logoMap: Record<string, ImageMetadata> = {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 64px;
-    transition: opacity 200ms ease, filter 200ms ease, transform 200ms ease;
-    opacity: 0.55;
-    filter: grayscale(1) brightness(1.6);
+    height: 72px;
+    transition: opacity 200ms ease, transform 200ms ease;
+    opacity: 0.6;
   }
   .press-link:hover {
     opacity: 1;
-    filter: grayscale(0) brightness(1);
     transform: translateY(-1px);
   }
   .press-link:focus-visible {
     opacity: 1;
-    filter: grayscale(0) brightness(1);
     outline: 2px solid var(--color-accent);
     outline-offset: 4px;
     border-radius: 4px;
@@ -130,7 +127,7 @@ const logoMap: Record<string, ImageMetadata> = {
   .press-logo {
     height: 100%;
     width: auto;
-    max-height: 64px;
+    max-height: 72px;
     max-width: 180px;
     object-fit: contain;
     display: block;

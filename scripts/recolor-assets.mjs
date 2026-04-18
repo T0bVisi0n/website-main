@@ -30,5 +30,10 @@ async function recolor(inputName, outputName, hex) {
 await recolor('tobvision-logo.png', 'tobvision-logo-light.png', '#f0ede8');
 await recolor('tobias-huber-signature.png', 'tobias-huber-signature-gold.png', '#c8963e');
 await recolor('tuev-rheinland-testmark.png', 'tuev-rheinland-testmark-light.png', '#f0ede8');
+// PR logos: source PNGs are monochrome black-on-transparent → recolor to warm-white
+// so they read on the dark background. Press section then drops greyscale+brightness filter.
+await recolor('press-t3n.png', 'press-t3n-light.png', '#f0ede8');
+await recolor('press-startup-valley.png', 'press-startup-valley-light.png', '#f0ede8');
+await recolor('press-lifepr.png', 'press-lifepr-light.png', '#f0ede8');
 
 console.log('Done.');

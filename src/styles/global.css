@@ -165,34 +165,30 @@
     color: var(--color-accent);
   }
 
-  /* Scroll-reveal — fade + lift + soft blur release when section enters viewport. */
+  /* Scroll-reveal — GPU-friendly fade + lift (no filter, no will-change after settle). */
   .reveal {
     opacity: 0;
-    transform: translateY(36px);
-    filter: blur(4px);
-    transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
-                transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
-                filter 900ms cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: opacity, transform, filter;
+    transform: translate3d(0, 32px, 0);
+    transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
+                transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
   }
   .reveal.is-visible {
     opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
+    transform: translate3d(0, 0, 0);
   }
 
   /* Staggered children reveal — use with parent .reveal-stagger. */
   .reveal-stagger > * {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
-                transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translate3d(0, 22px, 0);
+    transition: opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
+                transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 80ms; opacity: 1; transform: translateY(0); }
-  .reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 180ms; opacity: 1; transform: translateY(0); }
-  .reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 280ms; opacity: 1; transform: translateY(0); }
-  .reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 380ms; opacity: 1; transform: translateY(0); }
-  .reveal-stagger.is-visible > *:nth-child(n+5) { transition-delay: 480ms; opacity: 1; transform: translateY(0); }
+  .reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 80ms; opacity: 1; transform: translate3d(0, 0, 0); }
+  .reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 180ms; opacity: 1; transform: translate3d(0, 0, 0); }
+  .reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 280ms; opacity: 1; transform: translate3d(0, 0, 0); }
+  .reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 380ms; opacity: 1; transform: translate3d(0, 0, 0); }
+  .reveal-stagger.is-visible > *:nth-child(n+5) { transition-delay: 480ms; opacity: 1; transform: translate3d(0, 0, 0); }
 
   /* Accent-line: animated draw-in on reveal (width grows from 0 to 48px). */
   .reveal .accent-line,
@@ -209,13 +205,13 @@
   /* Hero initial-load cascade. */
   .hero-enter {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translate3d(0, 12px, 0);
     transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
                 transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
   }
   .hero-loaded .hero-enter {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
   .hero-loaded .hero-enter-1 { transition-delay: 100ms; }
   .hero-loaded .hero-enter-2 { transition-delay: 220ms; }
@@ -252,7 +248,6 @@
   .hero-enter {
     opacity: 1;
     transform: none;
-    filter: none;
     transition: none;
   }
   .reveal .accent-line,
