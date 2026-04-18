@@ -1,8 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import headshot from '../../assets/tobias-huber.jpg';
-import tuev from '../../assets/tuev-rheinland-testmark.png';
-import signature from '../../assets/tobias-huber-signature.png';
+import tuev from '../../assets/tuev-rheinland-testmark-light.png';
+import signature from '../../assets/tobias-huber-signature-gold.png';
 import { getContent } from '../../content';
 import type { Locale } from '../../i18n/utils';
 
@@ -15,31 +15,39 @@ const t = getContent(locale);
 const { about } = t;
 ---
 
-<section class="about" aria-labelledby="about-title">
-  <div class="tuev-bg" aria-hidden="true">
-    <Image
-      src={tuev}
-      alt=""
-      widths={[320, 480]}
-      sizes="360px"
-      loading="lazy"
-      quality={70}
-      class="tuev-img"
-    />
-  </div>
+<section class="about reveal" aria-labelledby="about-title">
   <div class="container-content about-inner">
-    <div class="about-photo-wrap">
-      <Image
-        src={headshot}
-        alt={about.photoAlt}
-        widths={[400, 560, 720]}
-        sizes="(min-width: 1024px) 420px, (min-width: 640px) 360px, 280px"
-        loading="lazy"
-        quality={82}
-        class="about-photo"
-      />
+    <div class="about-photo-col">
+      <div class="about-photo-wrap">
+        <Image
+          src={headshot}
+          alt={about.photoAlt}
+          widths={[400, 560, 720]}
+          sizes="(min-width: 1024px) 360px, (min-width: 640px) 320px, 280px"
+          loading="lazy"
+          quality={82}
+          class="about-photo"
+        />
+      </div>
       <p class="about-photo-caption">{about.photoCaption}</p>
+
+      <aside class="trust-badge" aria-label={about.tuevAlt}>
+        <Image
+          src={tuev}
+          alt={about.tuevAlt}
+          widths={[120, 180]}
+          sizes="80px"
+          loading="lazy"
+          quality={85}
+          class="trust-mark"
+        />
+        <div class="trust-text">
+          <p class="trust-line-1">TÜV Rheinland zertifiziert</p>
+          <p class="trust-line-2">Copywriting + Marketingstrategie</p>
+        </div>
+      </aside>
     </div>
+
     <div class="about-body">
       <span class="accent-line"></span>
       <h2 id="about-title" class="section-title">{about.title}</h2>
@@ -52,10 +60,10 @@ const { about } = t;
         <Image
           src={signature}
           alt={about.signatureAlt}
-          widths={[160, 220]}
-          sizes="180px"
+          widths={[200, 300]}
+          sizes="220px"
           loading="lazy"
-          quality={80}
+          quality={85}
           class="signature-img"
         />
       </div>
@@ -75,57 +83,39 @@ const { about } = t;
       padding: 96px 0;
     }
   }
-  .tuev-bg {
-    position: absolute;
-    right: -60px;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: 0.05;
-    pointer-events: none;
-    z-index: 0;
-    width: 360px;
-  }
-  @media (min-width: 1024px) {
-    .tuev-bg {
-      right: 40px;
-      width: 440px;
-      opacity: 0.08;
-    }
-  }
-  .tuev-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: grayscale(1) brightness(1.4);
-  }
   .about-inner {
     position: relative;
     display: grid;
     grid-template-columns: 1fr;
     gap: 36px;
     align-items: start;
-    z-index: 1;
   }
   @media (min-width: 1024px) {
     .about-inner {
-      grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
       gap: 64px;
     }
   }
-  .about-photo-wrap {
+  .about-photo-col {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
-    max-width: 320px;
+    gap: 12px;
+    max-width: 340px;
+  }
+  .about-photo-wrap {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
   }
   .about-photo {
     width: 100%;
     height: auto;
-    border-radius: 12px;
     aspect-ratio: 4 / 5;
     object-fit: cover;
-    border: 1px solid var(--color-border);
+    display: block;
   }
   .about-photo-caption {
     margin: 0;
@@ -133,6 +123,42 @@ const { about } = t;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-text-muted);
+  }
+  .trust-badge {
+    margin-top: 16px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+  }
+  .trust-mark {
+    width: 56px;
+    height: auto;
+    flex-shrink: 0;
+    opacity: 0.9;
+  }
+  .trust-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .trust-line-1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--color-text);
+    letter-spacing: 0.01em;
+  }
+  .trust-line-2 {
+    margin: 0;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.02em;
   }
   .about-body .accent-line {
     margin-bottom: 20px;
@@ -151,13 +177,15 @@ const { about } = t;
     color: var(--color-text);
   }
   .about-signature {
-    margin-top: 32px;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--color-border);
   }
   .signature-img {
-    width: 180px;
+    width: 220px;
     height: auto;
+    max-width: 100%;
     display: block;
-    opacity: 0.85;
-    filter: brightness(1.4) contrast(1.05);
+    opacity: 0.95;
   }
 </style>
