@@ -34,7 +34,7 @@ export const en = {
       line2: 'I turn it into a customer.',
     },
     subheadline:
-      'Conversion copy for DACH performance agencies. First a post-click audit showing where your client LP loses visitors. Then the copy that fixes it.',
+      'Conversion copy for performance agencies. First a post-click audit showing where your client LP loses visitors. Then the copy that fixes it.',
     photoAlt: 'Tobias Huber · TobVision',
     photoCaption: 'Tobias Huber · TobVision',
     ctaLabel: 'Book a quick chat',
