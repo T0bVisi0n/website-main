@@ -132,8 +132,8 @@ const cloudflareToken = import.meta.env.PUBLIC_CLOUDFLARE_BEACON_TOKEN;
     <Footer locale={locale} />
     <script>
       // Reveal-on-scroll: triggers once, respects prefers-reduced-motion automatically via CSS.
-      const els = document.querySelectorAll('.reveal');
-      if (els.length && 'IntersectionObserver' in window) {
+      const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+      if (revealEls.length && 'IntersectionObserver' in window) {
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
@@ -143,12 +143,19 @@ const cloudflareToken = import.meta.env.PUBLIC_CLOUDFLARE_BEACON_TOKEN;
               }
             });
           },
-          { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+          { threshold: 0.14, rootMargin: '0px 0px -80px 0px' }
         );
-        els.forEach((el) => observer.observe(el));
+        revealEls.forEach((el) => observer.observe(el));
       } else {
-        // No IntersectionObserver: show everything immediately.
-        els.forEach((el) => el.classList.add('is-visible'));
+        revealEls.forEach((el) => el.classList.add('is-visible'));
+      }
+
+      // Hero entrance cascade on first paint.
+      const hero = document.querySelector('.hero');
+      if (hero) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => hero.classList.add('hero-loaded'));
+        });
       }
     </script>
     <style>

@@ -16,13 +16,16 @@ const { hero, header } = t;
 <section class="hero" aria-labelledby="hero-headline">
   <div class="container-content hero-inner">
     <div class="hero-text">
-      <p class="section-label">Conversion Copy Sprint</p>
-      <h1 id="hero-headline" class="hero-headline">
+      <p class="section-label hero-enter hero-enter-1">
+        <span class="hero-accent-line" aria-hidden="true"></span>
+        <span>Conversion Copy Sprint</span>
+      </p>
+      <h1 id="hero-headline" class="hero-headline hero-enter hero-enter-2">
         <span class="headline-line">{hero.headline.line1}</span>
         <span class="headline-line accent">{hero.headline.line2}</span>
       </h1>
-      <p class="hero-sub">{hero.subheadline}</p>
-      <div class="hero-cta-wrap">
+      <p class="hero-sub hero-enter hero-enter-3">{hero.subheadline}</p>
+      <div class="hero-cta-wrap hero-enter hero-enter-4">
         <a href={header.ctaHref} class="btn-primary hero-cta">
           {hero.ctaLabel}
           <span aria-hidden="true" class="arrow">→</span>
@@ -30,7 +33,7 @@ const { hero, header } = t;
         <p class="hero-subline">{hero.ctaSubline}</p>
       </div>
     </div>
-    <div class="hero-photo-wrap">
+    <div class="hero-photo-wrap hero-enter hero-enter-3">
       <div class="hero-photo-frame">
         <Image
           src={headshot}
@@ -88,7 +91,16 @@ const { hero, header } = t;
     }
   }
   .section-label {
-    margin: 0 0 16px;
+    margin: 0 0 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-accent-line {
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-accent);
   }
   .hero-headline {
     font-family: var(--font-display);

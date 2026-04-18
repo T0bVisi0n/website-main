@@ -57,35 +57,49 @@ const logoMap: Record<string, ImageMetadata> = {
 
 <style>
   .press {
-    padding: 16px 0 32px;
-    border-top: 1px solid rgba(240, 237, 232, 0.04);
+    padding: 40px 0 48px;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    background-color: #181818;
   }
   @media (min-width: 768px) {
     .press {
-      padding: 24px 0 48px;
+      padding: 56px 0 64px;
     }
   }
   .press-row {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 28px;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .press-row {
       flex-direction: row;
       justify-content: center;
-      gap: 40px;
+      gap: 56px;
     }
   }
   .press-label {
     margin: 0;
-    font-family: var(--font-sans);
-    font-weight: 500;
-    font-size: 11px;
-    letter-spacing: 0.14em;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-text-muted);
+    color: var(--color-accent);
+    position: relative;
+    padding-left: 32px;
+  }
+  .press-label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 20px;
+    height: 2px;
+    background-color: var(--color-accent);
+    transform: translateY(-50%);
   }
   .press-list {
     list-style: none;
@@ -95,11 +109,11 @@ const logoMap: Record<string, ImageMetadata> = {
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 28px;
+    gap: 40px;
   }
   @media (min-width: 768px) {
     .press-list {
-      gap: 48px;
+      gap: 64px;
     }
   }
   .press-item {
@@ -110,28 +124,34 @@ const logoMap: Record<string, ImageMetadata> = {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
-    transition: opacity 200ms ease, filter 200ms ease, transform 200ms ease;
-    opacity: 0.55;
-    filter: grayscale(1) brightness(1.6);
+    height: 56px;
+    transition: opacity 250ms ease, filter 250ms ease, transform 250ms ease;
+    opacity: 0.85;
+    filter: grayscale(0.7) brightness(1.4);
+  }
+  @media (min-width: 768px) {
+    .press-link,
+    .press-link-static {
+      height: 68px;
+    }
   }
   .press-link:hover {
     opacity: 1;
-    filter: grayscale(0) brightness(1);
-    transform: translateY(-1px);
+    filter: grayscale(0) brightness(1.1);
+    transform: translateY(-2px);
   }
   .press-link:focus-visible {
     opacity: 1;
-    filter: grayscale(0) brightness(1);
+    filter: grayscale(0) brightness(1.1);
     outline: 2px solid var(--color-accent);
-    outline-offset: 4px;
+    outline-offset: 6px;
     border-radius: 4px;
   }
   .press-logo {
     height: 100%;
     width: auto;
-    max-height: 40px;
-    max-width: 130px;
+    max-height: 68px;
+    max-width: 180px;
     object-fit: contain;
     display: block;
   }

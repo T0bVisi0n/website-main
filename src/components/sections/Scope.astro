@@ -19,6 +19,61 @@ const { scope, header } = t;
       <p class="scope-subtitle">{scope.subtitle}</p>
     </header>
 
+    <div class="process-diagram" aria-hidden="true">
+      <div class="phase">
+        <div class="phase-glow"></div>
+        <div class="phase-circle">
+          <svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="14" cy="14" r="8" />
+            <line x1="20" y1="20" x2="26" y2="26" />
+            <line x1="11" y1="14" x2="17" y2="14" />
+            <line x1="14" y1="11" x2="14" y2="17" />
+          </svg>
+        </div>
+        <p class="phase-tag">Tag 1–3</p>
+        <p class="phase-name">Audit</p>
+      </div>
+
+      <div class="phase-connector" aria-hidden="true">
+        <svg viewBox="0 0 120 4" preserveAspectRatio="none" width="100%" height="4">
+          <line x1="0" y1="2" x2="120" y2="2" stroke="currentColor" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round" />
+        </svg>
+      </div>
+
+      <div class="phase">
+        <div class="phase-glow"></div>
+        <div class="phase-circle">
+          <svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 4h14l6 6v18H6z" />
+            <path d="M20 4v6h6" />
+            <line x1="11" y1="16" x2="22" y2="16" />
+            <line x1="11" y1="20" x2="22" y2="20" />
+            <line x1="11" y1="24" x2="18" y2="24" />
+          </svg>
+        </div>
+        <p class="phase-tag">Tag 4–8</p>
+        <p class="phase-name">Copy</p>
+      </div>
+
+      <div class="phase-connector" aria-hidden="true">
+        <svg viewBox="0 0 120 4" preserveAspectRatio="none" width="100%" height="4">
+          <line x1="0" y1="2" x2="120" y2="2" stroke="currentColor" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round" />
+        </svg>
+      </div>
+
+      <div class="phase">
+        <div class="phase-glow"></div>
+        <div class="phase-circle">
+          <svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 3L5 7v7c0 6.5 4.625 12.5 11 13.5C22.375 26.5 27 20.5 27 14V7L16 3z" />
+            <path d="M11 15l3.5 3.5L21 12" />
+          </svg>
+        </div>
+        <p class="phase-tag">Tag 9–10</p>
+        <p class="phase-name">Revision</p>
+      </div>
+    </div>
+
     <div class="scope-card">
       <div class="scope-blocks">
         {scope.blocks.map((block) => (
@@ -71,6 +126,106 @@ const { scope, header } = t;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--color-accent);
+  }
+  .process-diagram {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 16px;
+    max-width: 920px;
+    margin: 0 auto 40px;
+    padding: 32px 16px;
+    justify-items: center;
+    align-items: center;
+  }
+  @media (min-width: 768px) {
+    .process-diagram {
+      grid-template-columns: auto 1fr auto 1fr auto;
+      gap: 0;
+      padding: 40px 8px;
+      margin-bottom: 48px;
+    }
+  }
+  .phase {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    min-width: 120px;
+    text-align: center;
+  }
+  .phase-glow {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    transform: translate(-50%, 0);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200, 150, 62, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .phase-circle {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-accent);
+    background-color: var(--color-surface);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    z-index: 1;
+    transition: transform 300ms ease, box-shadow 300ms ease;
+  }
+  .process-diagram:hover .phase-circle {
+    box-shadow: 0 0 0 4px rgba(200, 150, 62, 0.08);
+  }
+  .phase:hover .phase-circle {
+    transform: scale(1.06);
+    box-shadow: 0 0 0 6px rgba(200, 150, 62, 0.18);
+  }
+  .phase-tag {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    z-index: 1;
+  }
+  .phase-name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--color-text);
+    z-index: 1;
+  }
+  .phase-connector {
+    width: 80%;
+    max-width: 140px;
+    color: var(--color-accent);
+    opacity: 0.5;
+  }
+  @media (min-width: 768px) {
+    .phase-connector {
+      width: 100%;
+      max-width: none;
+      padding: 0 8px;
+    }
+  }
+  @media (max-width: 767px) {
+    .phase-connector {
+      transform: rotate(90deg);
+      width: 40px;
+      height: 40px;
+      max-width: none;
+    }
   }
   .scope-card {
     background-color: var(--color-surface);
