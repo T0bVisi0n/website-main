@@ -31,6 +31,16 @@ export const de = {
     ctaLabel: 'Kurzes Gespräch buchen',
     ctaSubline: '15 Min. Wir schauen, ob es passt - kein Commitment.',
   },
+  press: {
+    label: 'Bekannt aus',
+    linkLabel: 'Artikel lesen',
+    // Update `href` with real article URLs — keep `#` placeholder until links are ready.
+    outlets: [
+      { name: 't3n', slug: 't3n', href: '#' },
+      { name: 'Startup Valley', slug: 'startup-valley', href: '#' },
+      { name: 'lifePR', slug: 'lifepr', href: '#' },
+    ],
+  },
   videoProof: {
     frame:
       'Die Branche ist egal. Schau dir an wie ich in unter 3 Minuten drei Dinge seh die das interne Team übersehen hat.',

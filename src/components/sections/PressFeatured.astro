@@ -1,0 +1,138 @@
+---
+import { Image } from 'astro:assets';
+import logoT3n from '../../assets/press-t3n.png';
+import logoStartupValley from '../../assets/press-startup-valley.png';
+import logoLifePR from '../../assets/press-lifepr.png';
+import { getContent } from '../../content';
+import type { Locale } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getContent(locale);
+const { press } = t;
+
+const logoMap: Record<string, ImageMetadata> = {
+  't3n': logoT3n,
+  'startup-valley': logoStartupValley,
+  'lifepr': logoLifePR,
+};
+---
+
+<section class="press" aria-labelledby="press-label">
+  <div class="container-content">
+    <div class="press-row">
+      <p id="press-label" class="press-label">{press.label}</p>
+      <ul class="press-list">
+        {press.outlets.map((outlet) => {
+          const logo = logoMap[outlet.slug];
+          const isLink = outlet.href && outlet.href !== '#';
+          const ariaLabel = `${outlet.name} — ${press.linkLabel}`;
+          return (
+            <li class="press-item">
+              {isLink ? (
+                <a
+                  href={outlet.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={ariaLabel}
+                  class="press-link"
+                >
+                  <Image src={logo} alt={outlet.name} widths={[120, 180]} sizes="140px" loading="lazy" quality={85} class="press-logo" />
+                </a>
+              ) : (
+                <span class="press-link press-link-static" aria-label={outlet.name}>
+                  <Image src={logo} alt={outlet.name} widths={[120, 180]} sizes="140px" loading="lazy" quality={85} class="press-logo" />
+                </span>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .press {
+    padding: 16px 0 32px;
+    border-top: 1px solid rgba(240, 237, 232, 0.04);
+  }
+  @media (min-width: 768px) {
+    .press {
+      padding: 24px 0 48px;
+    }
+  }
+  .press-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  @media (min-width: 768px) {
+    .press-row {
+      flex-direction: row;
+      justify-content: center;
+      gap: 40px;
+    }
+  }
+  .press-label {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+  .press-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px;
+  }
+  @media (min-width: 768px) {
+    .press-list {
+      gap: 48px;
+    }
+  }
+  .press-item {
+    display: inline-flex;
+  }
+  .press-link,
+  .press-link-static {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    transition: opacity 200ms ease, filter 200ms ease, transform 200ms ease;
+    opacity: 0.55;
+    filter: grayscale(1) brightness(1.6);
+  }
+  .press-link:hover {
+    opacity: 1;
+    filter: grayscale(0) brightness(1);
+    transform: translateY(-1px);
+  }
+  .press-link:focus-visible {
+    opacity: 1;
+    filter: grayscale(0) brightness(1);
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+  .press-logo {
+    height: 100%;
+    width: auto;
+    max-height: 40px;
+    max-width: 130px;
+    object-fit: contain;
+    display: block;
+  }
+</style>

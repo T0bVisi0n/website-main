@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/sections/Hero.astro';
+import PressFeatured from '../../components/sections/PressFeatured.astro';
 import VideoProof from '../../components/sections/VideoProof.astro';
 import Mechanism from '../../components/sections/Mechanism.astro';
 import Scope from '../../components/sections/Scope.astro';
@@ -25,6 +26,7 @@ const t = getContent(locale);
   includeJsonLd={true}
 >
   <Hero locale={locale} />
+  <PressFeatured locale={locale} />
   <VideoProof locale={locale} />
   <Mechanism locale={locale} />
   <Scope locale={locale} />

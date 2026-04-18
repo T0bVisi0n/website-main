@@ -19,6 +19,15 @@ export const en = {
       { label: 'Datenschutz', href: '/de/datenschutz/' },
     ],
   },
+  press: {
+    label: 'Featured in',
+    linkLabel: 'Read article',
+    outlets: [
+      { name: 't3n', slug: 't3n', href: '#' },
+      { name: 'Startup Valley', slug: 'startup-valley', href: '#' },
+      { name: 'lifePR', slug: 'lifepr', href: '#' },
+    ],
+  },
   placeholder: {
     title: 'English version coming this week.',
     body: 'The full English version of this site is being finalized and will be live within days.',

@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
-import headshot from '../../assets/tobias-huber.jpg';
-import tuev from '../../assets/tuev-rheinland-testmark-light.png';
+import headshot from '../../assets/ueber-mich.jpg';
+import tuev from '../../assets/tuev-rheinland-testmark.png';
 import signature from '../../assets/tobias-huber-signature-gold.png';
 import { getContent } from '../../content';
 import type { Locale } from '../../i18n/utils';
@@ -32,15 +32,17 @@ const { about } = t;
       <p class="about-photo-caption">{about.photoCaption}</p>
 
       <aside class="trust-badge" aria-label={about.tuevAlt}>
-        <Image
-          src={tuev}
-          alt={about.tuevAlt}
-          widths={[120, 180]}
-          sizes="80px"
-          loading="lazy"
-          quality={85}
-          class="trust-mark"
-        />
+        <div class="trust-mark-frame">
+          <Image
+            src={tuev}
+            alt={about.tuevAlt}
+            widths={[160, 240]}
+            sizes="100px"
+            loading="lazy"
+            quality={90}
+            class="trust-mark"
+          />
+        </div>
         <div class="trust-text">
           <p class="trust-line-1">TÜV Rheinland zertifiziert</p>
           <p class="trust-line-2">Copywriting + Marketingstrategie</p>
@@ -135,11 +137,24 @@ const { about } = t;
     border: 1px solid var(--color-border);
     border-radius: 10px;
   }
-  .trust-mark {
-    width: 56px;
-    height: auto;
+  .trust-mark-frame {
     flex-shrink: 0;
-    opacity: 0.9;
+    width: 72px;
+    height: 36px;
+    background-color: #f0ede8;
+    border-radius: 6px;
+    padding: 4px 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .trust-mark {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    display: block;
   }
   .trust-text {
     display: flex;
