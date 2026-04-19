@@ -22,7 +22,7 @@ export const de = {
   hero: {
     headline: {
       line1: 'Euer Media Buyer bringt den Klick.',
-      line2: 'Ich mache daraus einen Kunden.',
+      line2: 'Ich mach daraus einen Kunden.',
     },
     subheadline:
       'Conversion-Copy für DACH-Performance-Agenturen. Erst ein Post-Click-Audit das zeigt wo eure Kunden-LP Besucher verliert. Dann die Copy die es löst.',
