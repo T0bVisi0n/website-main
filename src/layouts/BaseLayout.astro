@@ -159,6 +159,25 @@ const cloudflareToken = import.meta.env.PUBLIC_CLOUDFLARE_BEACON_TOKEN;
         });
       }
 
+      // Scroll-reactive sticky header: invisible near top, phases into
+      // Deep Midnight Glass when scrollY > 40. Throttled via rAF.
+      const stickyHeader = document.querySelector('.sticky-header');
+      if (stickyHeader) {
+        const threshold = 40;
+        let ticking = false;
+        const updateHeader = () => {
+          stickyHeader.classList.toggle('scrolled', window.scrollY > threshold);
+          ticking = false;
+        };
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            window.requestAnimationFrame(updateHeader);
+            ticking = true;
+          }
+        }, { passive: true });
+        updateHeader();
+      }
+
       // Starfield: generate 120 points once. Positions stable, only opacity animates.
       // Skipped when prefers-reduced-motion is set (CSS also kills the animation).
       const starLayer = document.querySelector('.site-stars');
