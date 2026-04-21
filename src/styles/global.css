@@ -1,16 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand colors — locked per decisions-2026-04-17.md */
-  --color-bg: #141414;
+  /* Brand colors — Midnight + Signature Gold palette (2026-04-21 shift). */
+  --color-bg: #070B14;
+  --color-bg-top: #0B1120;
   --color-navy: #141e49;
-  --color-accent: #c8963e;
-  --color-accent-hover: #d9a95a;
+  --color-slate-blue: #3C5AA0;
+  --color-accent: #D4A94A;
+  --color-accent-hover: #e4bf68;
   --color-text: #f0ede8;
   --color-text-muted: #c9c5bf;
-  --color-border: rgba(200, 150, 62, 0.2);
-  --color-surface: #1c1c1c;
-  --color-surface-2: #232323;
+  --color-border: rgba(212, 169, 74, 0.2);
+  --color-surface: #0e1624;
+  --color-surface-2: #131e30;
 
   /* Typography — self-hosted woff2 */
   --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
@@ -34,12 +36,51 @@
     scroll-behavior: smooth;
   }
 
+  /* Site ambient: Gold-Glow (bottom-right) + Slate-Wash (top-left) + Midnight base.
+     Applied to body with fixed attachment so the glow stays viewport-relative as
+     the user scrolls — the stationary atmosphere is the signature of the palette.
+     Order matters: first entry renders on top. */
   body {
+    background:
+      radial-gradient(120% 80% at 90% 70%,
+        rgba(212, 169, 74, 0.22) 0%,
+        rgba(212, 169, 74, 0.06) 28%,
+        transparent 55%),
+      radial-gradient(80% 60% at 10% 20%,
+        rgba(60, 90, 160, 0.14) 0%,
+        transparent 60%),
+      linear-gradient(180deg, #0B1120 0%, #070B14 100%);
+    background-attachment: fixed;
     background-color: var(--color-bg);
     color: var(--color-text);
     font-family: var(--font-sans);
     font-weight: 400;
     line-height: 1.6;
+  }
+
+  /* Starfield overlay — 120 points of light generated once on mount, fixed to
+     the viewport, sits behind all content (z-index: -1) and above the body
+     gradient. Only opacity animates — positions are stable. */
+  .site-stars {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .site-stars span {
+    position: absolute;
+    border-radius: 50%;
+    background-color: #f0ede8;
+    opacity: var(--o, 0.4);
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: var(--o); }
+    50% { opacity: calc(var(--o) * 0.3); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .site-stars span { animation: none; }
   }
 
   h1, h2, h3, h4 {
@@ -195,12 +236,12 @@
     border-radius: inherit;
     padding: 1px;
     background: linear-gradient(135deg,
-      rgba(200, 150, 62, 0.55) 0%,
+      rgba(212, 169, 74, 0.55) 0%,
       rgba(240, 237, 232, 0.14) 28%,
       rgba(140, 180, 220, 0.08) 48%,
       rgba(255, 215, 170, 0.09) 62%,
       rgba(240, 237, 232, 0.14) 78%,
-      rgba(200, 150, 62, 0.45) 100%);
+      rgba(212, 169, 74, 0.45) 100%);
     -webkit-mask:
       linear-gradient(#000 0 0) content-box,
       linear-gradient(#000 0 0);
@@ -220,11 +261,11 @@
     inset: 0;
     border-radius: inherit;
     background: linear-gradient(135deg,
-      rgba(200, 150, 62, 0.06) 0%,
+      rgba(212, 169, 74, 0.06) 0%,
       transparent 30%,
       rgba(140, 180, 220, 0.025) 50%,
       transparent 70%,
-      rgba(200, 150, 62, 0.05) 100%);
+      rgba(212, 169, 74, 0.05) 100%);
     pointer-events: none;
     z-index: 0;
   }
@@ -246,8 +287,8 @@
     pointer-events: none;
     z-index: 0;
     background:
-      radial-gradient(600px 420px at 18% 22%, rgba(200, 150, 62, 0.08), transparent 60%),
-      radial-gradient(520px 380px at 82% 75%, rgba(20, 30, 73, 0.4), transparent 68%);
+      radial-gradient(600px 420px at 18% 22%, rgba(212, 169, 74, 0.08), transparent 60%),
+      radial-gradient(520px 380px at 82% 75%, rgba(60, 90, 160, 0.14), transparent 68%);
   }
   .section-orbs > * {
     position: relative;

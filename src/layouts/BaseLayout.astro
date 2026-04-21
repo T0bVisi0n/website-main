@@ -63,7 +63,7 @@ const cloudflareToken = import.meta.env.PUBLIC_CLOUDFLARE_BEACON_TOKEN;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#141414" />
+    <meta name="theme-color" content="#0B1120" />
     <meta name="color-scheme" content="dark" />
 
     <title>{title}</title>
@@ -124,6 +124,7 @@ const cloudflareToken = import.meta.env.PUBLIC_CLOUDFLARE_BEACON_TOKEN;
     )}
   </head>
   <body>
+    <div class="site-stars" aria-hidden="true"></div>
     <a href="#main" class="sr-only focus:not-sr-only absolute top-2 left-2 z-50 bg-[--color-accent] text-[--color-bg] px-4 py-2 rounded">Skip to content</a>
     <StickyHeader locale={locale} pathname={pathname} />
     <main id="main" class="pt-24 md:pt-28">
@@ -156,6 +157,25 @@ const cloudflareToken = import.meta.env.PUBLIC_CLOUDFLARE_BEACON_TOKEN;
         requestAnimationFrame(() => {
           requestAnimationFrame(() => hero.classList.add('hero-loaded'));
         });
+      }
+
+      // Starfield: generate 120 points once. Positions stable, only opacity animates.
+      // Skipped when prefers-reduced-motion is set (CSS also kills the animation).
+      const starLayer = document.querySelector('.site-stars');
+      if (starLayer && !starLayer.firstElementChild) {
+        const fragment = document.createDocumentFragment();
+        for (let i = 0; i < 120; i++) {
+          const star = document.createElement('span');
+          const size = Math.random() < 0.5 ? 1 : 2;
+          star.style.top = (Math.random() * 100).toFixed(2) + '%';
+          star.style.left = (Math.random() * 100).toFixed(2) + '%';
+          star.style.width = size + 'px';
+          star.style.height = size + 'px';
+          star.style.setProperty('--o', (0.25 + Math.random() * 0.3).toFixed(3));
+          star.style.animationDelay = (Math.random() * 4).toFixed(2) + 's';
+          fragment.appendChild(star);
+        }
+        starLayer.appendChild(fragment);
       }
     </script>
     <style>
