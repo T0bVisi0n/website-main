@@ -26,21 +26,10 @@
 }
 
 @layer base {
+  /* Site ambient lives on <html> (Group 1 of the root stacking context) so the
+     starfield with z-index: -1 can sit above it but below in-flow content.
+     background-attachment: fixed keeps the glow viewport-stationary on scroll. */
   html {
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    scroll-behavior: smooth;
-  }
-
-  /* Site ambient: Gold-Glow (bottom-right) + Slate-Wash (top-left) + Midnight base.
-     Applied to body with fixed attachment so the glow stays viewport-relative as
-     the user scrolls — the stationary atmosphere is the signature of the palette.
-     Order matters: first entry renders on top. */
-  body {
     background:
       radial-gradient(120% 80% at 90% 70%,
         rgba(212, 169, 74, 0.22) 0%,
@@ -54,13 +43,25 @@
     background-color: var(--color-bg);
     color: var(--color-text);
     font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  /* Body is transparent so the html ambient + starfield show through.
+     z-index: -1 stars land between <html> background and <body>'s in-flow content. */
+  body {
+    background: transparent;
+    color: var(--color-text);
+    font-family: var(--font-sans);
     font-weight: 400;
     line-height: 1.6;
   }
 
   /* Starfield overlay — 120 points of light generated once on mount, fixed to
-     the viewport, sits behind all content (z-index: -1) and above the body
-     gradient. Only opacity animates — positions are stable. */
+     the viewport. z-index: -1 sits above the html gradient but below in-flow
+     body content. Only opacity animates — positions are stable. */
   .site-stars {
     position: fixed;
     inset: 0;
